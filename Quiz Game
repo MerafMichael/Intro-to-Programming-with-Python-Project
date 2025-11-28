@@ -1,0 +1,150 @@
+import time
+
+# 1. COLORS SETUP
+# These codes make text colorful in the terminal
+class Color:
+    PURPLE = '\033[95m'
+    CYAN = '\033[96m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
+def run_quiz():
+    # 2. QUESTIONS DATA
+    # A list of dictionaries. Each dictionary is one question.
+    quiz_data = [
+        {
+            "question": "Which animal is known as the 'Ship of the Desert'?",
+            "options": ["A. Horse", "B. Camel", "C. Elephant", "D. Lion"],
+            "answer": "B"
+        },
+        {
+            "question": "How many sides does a hexagon have?",
+            "options": ["A. Five", "B. Six", "C. Seven", "D. Eight"],
+            "answer": "B"
+        },
+        {
+            "question": "Which planet is closest to the Sun?",
+            "options": ["A. Venus", "B. Earth", "C. Mars", "D. Mercury"],
+            "answer": "D"
+        },
+        {
+            "question": "In Python, which index grabs the first item of a list?",
+            "options": ["A. [1]", "B. [0]", "C. [-1]", "D. [first]"],
+            "answer": "B"
+        },
+        {
+            "question": "What is the capital city of Japan?",
+            "options": ["A. Beijing", "B. Seoul", "C. Tokyo", "D. Bangkok"],
+            "answer": "C"
+        },
+        {
+            "question": "What is H2O commonly known as?",
+            "options": ["A. Salt", "B. Water", "C. Oxygen", "D. Hydrogen"],
+            "answer": "B"
+        },
+        {
+            "question": "Which organ in the human body is primarily responsible for detoxification?",
+            "options": ["A. Heart", "B. Liver", "C. Kidney", "D. Lungs"],
+            "answer": "B"
+        },
+        {
+            "question": "What is the largest mammal in the world?",
+            "options": ["A. Elephant", "B. Blue Whale", "C. Giraffe", "D. Great White Shark"],
+            "answer": "B"
+        },
+        {
+            "question": "Which element has the chemical symbol 'O'?",
+            "options": ["A. Gold", "B. Oxygen", "C. Osmium", "D. Silver"],
+            "answer": "B"
+        },
+        {
+            "question": "In which year did the Titanic sink?",
+            "options": ["A. 1910", "B. 1912", "C. 1914", "D. 1916"],
+            "answer": "B"
+        }
+    ]
+
+    # 3. VARIABLES
+    score = 0
+    total_questions = len(quiz_data)
+    incorrect_log = [] # Used to store corrections
+    valid_choices = {'A', 'B', 'C', 'D'}
+
+    # --- INTRO ---
+    print(Color.BOLD + Color.PURPLE + "="*45)
+    print("       🌟  Welcome to Quiz Game  🌟")
+    print("="*45 + Color.END)
+    time.sleep(1)
+
+    # 4. GAME LOOP
+    for index, item in enumerate(quiz_data, 1):
+        # Display Question
+        print("\n" + "-"*45)
+        print(f"{Color.BLUE}{Color.BOLD}Question {index}:{Color.END} {item['question']}")
+        
+        # Display Options
+        for option in item['options']:
+            print(f"{Color.YELLOW}  {option}{Color.END}")
+
+        # Get User Input
+        #Input validation block
+
+        user_input = input(f"\n{Color.CYAN}  Your Choice (A/B/C/D): {Color.END}").strip().upper()
+        while user_input not in valid_choices:
+            print(f"{Color.RED}Invalid input {Color.END}please enter only A, B, C, or D.")
+        #Ask for input again
+
+            user_input = input(f"{Color.CYAN}  Your Choice (A/B/C/D): {Color.END}").strip().upper()
+
+        # Check Answer
+        if user_input == item['answer']:
+            print(f"  {Color.GREEN}✅ Correct!{Color.END}")
+            score += 1
+        else:
+            print(f"  {Color.RED}❌ Incorrect.{Color.END}")
+            # Store the mistake to show later
+            incorrect_log.append({
+                "question": item['question'],
+                "correct_ans": item['answer'],
+                "your_ans": user_input
+            })
+        
+        time.sleep(0.8) # Short pause for user experience
+
+    # --- FINAL SCORE DISPLAY ---
+    print("\n" + Color.BOLD + Color.PURPLE + "="*45)
+    print("               🏁  RESULTS  🏁")
+    print("="*45 + Color.END)
+    
+    # Displays score
+    print(f"\n{Color.BOLD}You Scored: {Color.GREEN}{score}/{total_questions}{Color.END}")
+
+    #  nice message based on score
+    if score == total_questions:
+        print("Perfect! You got them all right.")
+    elif score >= total_questions / 2:
+        print("Well done!")
+    else:
+        print("Better luck next time.")
+
+    # 5. SHOW CORRECTIONS
+    # Only runs if the list 'incorrect_log' is not empty
+    if incorrect_log:
+        print(f"\n{Color.UNDERLINE}Here are the questions you missed:{Color.END}")
+        for mistake in incorrect_log:
+            print(f"\nQ: {mistake['question']}")
+            print(f"   You said: {Color.RED}{mistake['your_ans']}{Color.END}")
+            print(f"   Correct Answer: {Color.GREEN}{mistake['correct_ans']}{Color.END}")
+if __name__ == "__main__":
+    while True:
+        run_quiz()
+        replay = input("\nWould you like to play again? (yes/no): ").strip().lower()
+        if replay != 'yes':
+            print("\nThank you for playing! Goodbye!")
+            break
+print("\n" * 3)
