@@ -18,6 +18,7 @@ Features:
     Prints a formatted receipt
 
 Skills Practiced: loops, input(), conditionals, lists/dictionaries, sum(), print formatting
+
 2. 🛒 Simple Grocery Cart Checkout
 
 Description:
@@ -31,6 +32,7 @@ Features:
     Handles invalid input gracefully
 
 Skills Practiced: dictionaries, loops, input handling, math operations, formatting, error handling
+
 3. 📝 To-Do List App (Text-Based)
 
 Description:
@@ -44,6 +46,7 @@ Features:
     Shows summary of completed vs pending tasks
 
 Skills Practiced: lists, string parsing, loops, input handling, CRUD basics
+
 4. 🎬 Movie Ticket Booking Simulation
 
 Description:
@@ -58,6 +61,7 @@ Features:
     Displays total bookings & cost
 
 Skills Practiced: loops, input handling, conditionals, calculations, nested dictionaries
+
 5. ❓ Quiz Game
 
 Description:
